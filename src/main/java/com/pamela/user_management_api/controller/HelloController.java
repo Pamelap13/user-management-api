@@ -16,6 +16,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello(){
-        return userService.getMessage();
+        return "userService.getMessage()";
     }
 }
