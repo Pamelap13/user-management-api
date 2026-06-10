@@ -22,4 +22,10 @@ public class UserRepository {
         users.add(user);
         return user;
     }
+    public User findById( Long id){
+        return users.stream()
+                .filter(user -> user.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
 }
