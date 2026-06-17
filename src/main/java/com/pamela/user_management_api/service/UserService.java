@@ -28,5 +28,12 @@ public class UserService {
         }
         return user;
     }
+    public User updateUser(Long id, User updateUser ){
+        User user = userRepository.update(id, updateUser);
+        if (user == null){
+            throw new UserNotFoundException("User not found");
+        }
+        return  user;
+    }
 
 }

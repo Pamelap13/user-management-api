@@ -28,4 +28,13 @@ public class UserRepository {
                 .findFirst()
                 .orElse(null);
     }
+    public User update(Long id, User updateUser){
+        User existingUser = findById(id);
+        if (existingUser == null){
+            return null;
+        }
+        existingUser.setName(updateUser.getName());
+        existingUser.setEmail(updateUser.getEmail());
+        return existingUser;
+    }
 }
