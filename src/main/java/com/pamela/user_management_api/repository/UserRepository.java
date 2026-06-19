@@ -37,4 +37,12 @@ public class UserRepository {
         existingUser.setEmail(updateUser.getEmail());
         return existingUser;
     }
+    public boolean delete (Long id){
+        User user  = findById(id);
+
+        if(user == null){
+            return false;
+        }
+        return users.remove(user);
+    }
 }
