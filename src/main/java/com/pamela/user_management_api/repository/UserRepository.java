@@ -1,48 +1,49 @@
 package com.pamela.user_management_api.repository;
 
 import com.pamela.user_management_api.model.User;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+//@Repository
+//public class UserRepository {
+public interface UserRepository extends JpaRepository<User, Long>
+{
 
-@Repository
-public class UserRepository {
-
-    private final List<User> users = new ArrayList<>();
-
-    public UserRepository(){
-        users.add(new User(1L, "Pamela", "pamela@email.com"));
-        users.add(new User(2L, "Ana", "ana@email.com"));
-    }
-    public List<User> findall(){
-        return users;
-    }
-    public User save (User user){
-        users.add(user);
-        return user;
-    }
-    public User findById( Long id){
-        return users.stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-    public User update(Long id, User updateUser){
-        User existingUser = findById(id);
-        if (existingUser == null){
-            return null;
-        }
-        existingUser.setName(updateUser.getName());
-        existingUser.setEmail(updateUser.getEmail());
-        return existingUser;
-    }
-    public boolean delete (Long id){
-        User user  = findById(id);
-
-        if(user == null){
-            return false;
-        }
-        return users.remove(user);
-    }
 }
+
+//    private final List<User> users = new ArrayList<>();
+//
+//    public UserRepository(){
+//        users.add(new User(1L, "Pamela", "pamela@email.com"));
+//        users.add(new User(2L, "Ana", "ana@email.com"));
+//    }
+//    public List<User> findall(){
+//        return users;
+//    }
+//    public User save (User user){
+//        users.add(user);
+//        return user;
+//    }
+//    public User findById( Long id){
+//        return users.stream()
+//                .filter(user -> user.getId().equals(id))
+//                .findFirst()
+//                .orElse(null);
+//    }
+//    public User update(Long id, User updateUser){
+//        User existingUser = findById(id);
+//        if (existingUser == null){
+//            return null;
+//        }
+//        existingUser.setName(updateUser.getName());
+//        existingUser.setEmail(updateUser.getEmail());
+//        return existingUser;
+//    }
+//    public boolean delete (Long id){
+//        User user  = findById(id);
+//
+//        if(user == null){
+//            return false;
+//        }
+//        return users.remove(user);
+//    }
+//}

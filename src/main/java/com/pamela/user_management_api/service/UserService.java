@@ -16,31 +16,27 @@ public class UserService {
     }
 
     public List<User> getUsers(){
-        return userRepository.findall();
+        return userRepository.findAll();
     }
     public User createUser(User user){
         return userRepository.save(user);
     }
     public User getUserById( Long id){
-        User user = userRepository.findById(id);
-        if (user == null){
-            throw new UserNotFoundException("User not found");
-        }
-        return user;
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
     public User updateUser(Long id, User updateUser ){
-        User user = userRepository.update(id, updateUser);
-        if (user == null){
-            throw new UserNotFoundException("User not found");
-        }
-        return  user;
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
+        user.setName(updateUser.getName());
+        user.setEmail(updateUser.getEmail());
+        return userRepository.save(user);
     }
 
     public void deleteUser(Long id){
-        boolean deleted = userRepository.delete(id);
-        if (!deleted){
-            throw new UserNotFoundException("User not found");
-        }
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
+        userRepository.delete(user);
     }
 
 }
